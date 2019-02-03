@@ -13,21 +13,14 @@
 
 int main(void)
 {
-    uint8_t result[64] = {0};
-    uint8_t i;
-
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
     delay_init();
     USART1_Init(115200);
     LED_Init();
 
-    PCD_ReadMultiRegister(FIFODataReg, 64, result, 0);
+    PCD_Init();
 
-    for(i = 0; i < 64; i++)
-    {
-        printf("result[%d] = %X\r\n", i, result[i]);
-    }
-    
+    printf("res %d\r\n", PCD_PerformSelfTest());
 
     while (1)
     {
