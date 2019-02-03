@@ -8,9 +8,6 @@
 #include "mfrc522.h"
 
 
-
-
-
 int main(void)
 {
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);

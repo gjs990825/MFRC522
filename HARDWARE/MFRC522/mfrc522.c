@@ -414,7 +414,7 @@ _Bool PCD_PerformSelfTest(void)
     // Determine firmware version (see section 9.3.4.8 in spec)
     version = PCD_ReadRegister(VersionReg);
 
-    printf("Firmvare version :0x%X\r\n", version);
+    // printf("Firmvare version :0x%X\r\n", version);
 
     // Pick the appropriate reference values
     switch (version)
