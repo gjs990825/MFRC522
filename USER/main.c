@@ -5,23 +5,28 @@
 #include "delay.h"
 #include "usart.h"
 #include "spi.h"
+#include "mfrc522.h"
+
+
+
 
 
 int main(void)
 {
-	uint8_t status=0;
-
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
     delay_init();
     USART1_Init(115200);
     LED_Init();
 
-    
-	while (1)
-	{
+    HardSPI_Init();
+    SPI_SS_H();
+
+    while (1)
+    {
         LED_Blink(1);
-		delay_ms(500);
-	}
+        printf("verison : %d\r\n", PCD_ReadRegister(VersionReg));
+        delay_ms(500);
+    }
     return 0;
 }
 

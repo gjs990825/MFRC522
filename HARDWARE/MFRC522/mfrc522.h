@@ -5,10 +5,12 @@
 #include "spi.h"
 #include <stdint.h>
 
+// PCD: Proximity coupling device
+// PICC: Proximity Integrated Circuit Card
 
 // MFRC522 registers. Described in chapter 9 of the datasheet.
 // When using SPI all addresses are shifted one bit left in the "SPI address byte" (section 8.1.2.3)
-enum PCD_Register {
+typedef enum {
 	// Page 0: Command and status
 	//						  0x00			// reserved for future use
 	CommandReg				= 0x01 << 1,	// starts and stops command execution
@@ -80,7 +82,7 @@ enum PCD_Register {
 	// 						  0x3D			// reserved for production tests
 	// 						  0x3E			// reserved for production tests
 	// 						  0x3F			// reserved for production tests
-};
+} PCD_Register;
 
 // MFRC522 commands. Described in chapter 10 of the datasheet.
 enum PCD_Command {
@@ -181,13 +183,14 @@ typedef struct {
 	uint8_t		uidByte[10];
 	uint8_t		sak;			// The SAK (Select acknowledge) byte returned from the PICC after successful selection.
 } Uid;
+
 // A struct used for passing a MIFARE Crypto1 key
 typedef struct {
 	uint8_t		keyByte[MF_KEY_SIZE];
 } MIFARE_Key;
 
 
-
+uint8_t PCD_ReadRegister(PCD_Register reg);
 
 
 

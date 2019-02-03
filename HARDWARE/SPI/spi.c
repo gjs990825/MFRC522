@@ -1,31 +1,33 @@
 #include "spi.h"
 
 
-
 void HardSPI_Init(void)
 {
 	SPI_InitTypeDef SPI_InitStructure; 
 	GPIO_InitTypeDef GPIO_InitStructure;
-	
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB, ENABLE);
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE); 
 
-	/*配置 SPI_NRF_SPI的 SCK,MISO,MOSI引脚 */ 
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7; 
+	RCC_APB2PeriphClockCmd(SPI_GPIO_RCC | SPI_SS_RCC, ENABLE);
+
+	if (IS_RCC_APB2_PERIPH(SPI_PERIPH_RCC))
+	{
+		RCC_APB2PeriphClockCmd(SPI_PERIPH_RCC, ENABLE);
+	}
+	else
+	{
+		RCC_APB1PeriphClockCmd(SPI_PERIPH_RCC, ENABLE);
+	}
+
+	/*配置 SCK,MISO,MOSI引脚 */ 
+	GPIO_InitStructure.GPIO_Pin = SPI_SCK_PIN | SPI_MISO_PIN | SPI_MOSI_PIN; 
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz; 
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; //复用功能 
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
-	/*配置SPI_NRF_SPI的CE引脚，和SPI_NRF_SPI的 CSN 引脚:*/
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10; 
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz; 
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1; 
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz; 
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 
-	GPIO_Init(GPIOB, &GPIO_InitStructure);	
-	
-	GPIO_SetBits(GPIOB, GPIO_Pin_1);
+	GPIO_Init(SPI_GPIO_PORT, &GPIO_InitStructure);
+
+	//配置 SS 引脚
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+	GPIO_InitStructure.GPIO_Pin = SPI_SS_PIN;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(SPI_SS_PORT, &GPIO_InitStructure);
 	
 	SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex; //双线全双工 
 	SPI_InitStructure.SPI_Mode = SPI_Mode_Master; //主模式 
@@ -36,20 +38,20 @@ void HardSPI_Init(void)
 	SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_8; //8分频，9MHz 
 	SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB; //高位在前 
 	SPI_InitStructure.SPI_CRCPolynomial = 7; 
-	SPI_Init(SPI1, &SPI_InitStructure); 
-	/* Enable SPI1 */ 
-	SPI_Cmd(SPI1, ENABLE);
+	SPI_Init(SPI_PERIPH, &SPI_InitStructure); 
+	/* Enable SPI */ 
+	SPI_Cmd(SPI_PERIPH, ENABLE);
 }
 
 uint8_t SPI_RW(uint8_t dat) 
 { 
 	/* 当 SPI发送缓冲器非空时等待 */ 
-	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET); 
-	/* 通过 SPI1发送一字节数据 */ 
-	SPI_I2S_SendData(SPI1, dat); 
+	while (SPI_I2S_GetFlagStatus(SPI_PERIPH, SPI_I2S_FLAG_TXE) == RESET); 
+	/* 通过 SPI发送一字节数据 */ 
+	SPI_I2S_SendData(SPI_PERIPH, dat); 
 	/* 当SPI接收缓冲器为空时等待 */ 
-	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET); 
+	while (SPI_I2S_GetFlagStatus(SPI_PERIPH, SPI_I2S_FLAG_RXNE) == RESET); 
 	/* Return the byte read from the SPI bus */ 
-	return SPI_I2S_ReceiveData(SPI1); 
+	return SPI_I2S_ReceiveData(SPI_PERIPH); 
 }
 

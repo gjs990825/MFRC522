@@ -407,16 +407,6 @@
               <FileType>1</FileType>
               <FilePath>.\HARDWARE\SPI\spi.c</FilePath>
             </File>
-            <File>
-              <FileName>mfrc522.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HARDWARE\MFRC522\mfrc522.c</FilePath>
-            </File>
-            <File>
-              <FileName>AX12.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HARDWARE\AX12\AX12.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
