@@ -1,0 +1,27 @@
+--cpu Cortex-M3
+".\objects\main.o"
+".\objects\led.o"
+".\objects\spi.o"
+".\objects\mfrc522.o"
+".\objects\ax12.o"
+".\objects\sys.o"
+".\objects\delay.o"
+".\objects\usart.o"
+".\objects\retarget.o"
+".\objects\stm32f10x_it.o"
+".\objects\system_stm32f10x.o"
+".\objects\core_cm3.o"
+".\objects\misc.o"
+".\objects\stm32f10x_adc.o"
+".\objects\stm32f10x_dma.o"
+".\objects\stm32f10x_exti.o"
+".\objects\stm32f10x_gpio.o"
+".\objects\stm32f10x_rcc.o"
+".\objects\stm32f10x_spi.o"
+".\objects\stm32f10x_tim.o"
+".\objects\stm32f10x_usart.o"
+".\objects\startup_stm32f10x_hd.o"
+--strict --scatter ".\Objects\RC522.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\RC522.map" -o .\Objects\RC522.axf
