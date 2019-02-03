@@ -2,6 +2,7 @@
 ".\objects\main.o"
 ".\objects\led.o"
 ".\objects\spi.o"
+".\objects\mfrc522.o"
 ".\objects\sys.o"
 ".\objects\delay.o"
 ".\objects\usart.o"

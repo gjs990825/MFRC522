@@ -6,7 +6,7 @@ void HardSPI_Init(void)
 	SPI_InitTypeDef SPI_InitStructure; 
 	GPIO_InitTypeDef GPIO_InitStructure;
 
-	RCC_APB2PeriphClockCmd(SPI_GPIO_RCC | SPI_SS_RCC, ENABLE);
+	RCC_APB2PeriphClockCmd(SPI_GPIO_RCC, ENABLE);
 
 	if (IS_RCC_APB2_PERIPH(SPI_PERIPH_RCC))
 	{
@@ -22,12 +22,6 @@ void HardSPI_Init(void)
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz; 
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; //复用功能 
 	GPIO_Init(SPI_GPIO_PORT, &GPIO_InitStructure);
-
-	//配置 SS 引脚
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-	GPIO_InitStructure.GPIO_Pin = SPI_SS_PIN;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(SPI_SS_PORT, &GPIO_InitStructure);
 	
 	SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex; //双线全双工 
 	SPI_InitStructure.SPI_Mode = SPI_Mode_Master; //主模式 

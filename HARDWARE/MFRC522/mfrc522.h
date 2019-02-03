@@ -8,6 +8,37 @@
 // PCD: Proximity coupling device
 // PICC: Proximity Integrated Circuit Card
 
+// Set SS and RST Pin info
+#define MFRC522_SS_RST_PORT GPIOA
+#define MFRC522_SS_RST_RCC RCC_APB2Periph_GPIOA
+#define MFRC522_SS_PIN GPIO_Pin_3
+#define MFRC522_RST_PIN GPIO_Pin_3
+
+// Set SS High
+static inline void MFRC522_SS_H(void)
+{
+	GPIO_SetBits(MFRC522_SS_RST_PORT, MFRC522_SS_PIN);
+}
+
+// Set SS Low
+static inline void MFRC522_SS_L(void)
+{
+	GPIO_ResetBits(MFRC522_SS_RST_PORT, MFRC522_SS_PIN);
+}
+
+// Set RST High
+static inline void MFRC522_RST_H(void)
+{
+	GPIO_SetBits(MFRC522_SS_RST_PORT, MFRC522_RST_PIN);
+}
+
+// Set RST Low
+static inline void MFRC522_RST_L(void)
+{
+	GPIO_ResetBits(MFRC522_SS_RST_PORT, MFRC522_RST_PIN);
+}
+
+
 // MFRC522 registers. Described in chapter 9 of the datasheet.
 // When using SPI all addresses are shifted one bit left in the "SPI address byte" (section 8.1.2.3)
 typedef enum {
@@ -165,7 +196,7 @@ enum PICC_Type {
 
 // Return codes from the functions in this class. Remember to update GetStatusCodeName() if you add more.
 // last value set to 0xff, then compiler uses less ram, it seems some optimisations are triggered
-enum StatusCode{
+typedef enum {
 	STATUS_OK				,	// Success
 	STATUS_ERROR			,	// Error in communication
 	STATUS_COLLISION		,	// Collission detected
@@ -175,7 +206,7 @@ enum StatusCode{
 	STATUS_INVALID			,	// Invalid argument.
 	STATUS_CRC_WRONG		,	// The CRC_A does not match
 	STATUS_MIFARE_NACK		= 0xff	// A MIFARE PICC responded with NAK.
-};
+} StatusCode;
 
 // A struct used for passing the UID of a PICC.
 typedef struct {
@@ -189,10 +220,22 @@ typedef struct {
 	uint8_t		keyByte[MF_KEY_SIZE];
 } MIFARE_Key;
 
+/////////////////////////////////////////////////////////////////////////////////////
+// Functions for setup the interface
+/////////////////////////////////////////////////////////////////////////////////////
+void MFRC522_Init(void);
 
+
+/////////////////////////////////////////////////////////////////////////////////////
+// Basic interface functions for communicating with the MFRC522
+/////////////////////////////////////////////////////////////////////////////////////
+void PCD_WriteRegister(PCD_Register reg, uint8_t value);
+void PCD_WriteMultiRegister(PCD_Register reg, uint8_t count, uint8_t *values);
 uint8_t PCD_ReadRegister(PCD_Register reg);
-
-
+void PCD_ReadMultiRegister(PCD_Register reg, uint8_t count, uint8_t *values, uint8_t rxAlign);
+void PCD_SetRegisterBitMask(PCD_Register reg, uint8_t mask);
+void PCD_ClearRegisterBitMask(PCD_Register reg, uint8_t mask);
+StatusCode PCD_CalculateCRC(uint8_t *data, uint8_t length, uint8_t *result);
 
 
 #endif
