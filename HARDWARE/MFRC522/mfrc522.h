@@ -230,6 +230,7 @@ typedef struct {
 /////////////////////////////////////////////////////////////////////////////////////
 // Basic interface functions for communicating with the MFRC522
 /////////////////////////////////////////////////////////////////////////////////////
+
 void PCD_WriteRegister(PCD_Register reg, uint8_t value);
 void PCD_WriteMultiRegister(PCD_Register reg, uint8_t count, uint8_t *values);
 uint8_t PCD_ReadRegister(PCD_Register reg);
@@ -238,9 +239,11 @@ void PCD_SetRegisterBitMask(PCD_Register reg, uint8_t mask);
 void PCD_ClearRegisterBitMask(PCD_Register reg, uint8_t mask);
 StatusCode PCD_CalculateCRC(uint8_t *data, uint8_t length, uint8_t *result);
 
+
 /////////////////////////////////////////////////////////////////////////////////////
 // Functions for manipulating the MFRC522
 /////////////////////////////////////////////////////////////////////////////////////
+
 void PCD_Init(void);
 void PCD_Reset(void);
 void PCD_AntennaOn(void);
@@ -253,8 +256,24 @@ _Bool PCD_PerformSelfTest(void);
 /////////////////////////////////////////////////////////////////////////////////////
 // Power control functions
 /////////////////////////////////////////////////////////////////////////////////////
+
 void PCD_SoftPowerDown(void);
 void PCD_SoftPowerUp(void);
-	
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+// Functions for communicating with PICCs
+/////////////////////////////////////////////////////////////////////////////////////
+
+StatusCode PCD_TransceiveData(uint8_t *sendData, uint8_t sendLen, uint8_t *backData, uint8_t *backLen, uint8_t *validBits, uint8_t rxAlign, _Bool checkCRC);
+StatusCode PCD_CommunicateWithPICC(uint8_t command, uint8_t waitIRq, uint8_t *sendData, uint8_t sendLen, uint8_t *backData, uint8_t *backLen, uint8_t *validBits, uint8_t rxAlign, _Bool checkCRC);
+StatusCode PICC_RequestA(uint8_t *bufferATQA, uint8_t *bufferSize);
+StatusCode PICC_WakeupA(uint8_t *bufferATQA, uint8_t *bufferSize);
+StatusCode PICC_REQA_or_WUPA(uint8_t command, uint8_t *bufferATQA, uint8_t *bufferSize);
+StatusCode PICC_Seclect(Uid *uid, uint8_t validBits);
+StatusCode PICC_HaltA(void);
+
+
+
 
 #endif
