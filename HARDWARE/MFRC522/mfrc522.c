@@ -1570,7 +1570,7 @@ void PICC_DumpDetailsToSerial(Uid *uid	///< Pointer to Uid struct returned from 
 	printf("Card SAK: ");
 	if(uid->sak < 0x10)
 		printf("0");
-    printf("%X", uid->sak);
+    printf("%X\r\n", uid->sak);
 	
 	// (suggested) PICC type
 	PICC_Type piccType = PICC_GetType(uid->sak);

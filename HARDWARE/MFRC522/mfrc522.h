@@ -330,5 +330,7 @@ _Bool MIFARE_UnbrickUidSector(_Bool logErrors);
 _Bool PICC_IsNewCardPresent(void);
 _Bool PICC_ReadCardSerial(void);
 
+extern Uid uid;
+
 
 #endif

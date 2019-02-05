@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\Objects\RC522.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\RC522.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Feb 05 21:39:02 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Feb 05 22:07:33 2019
 <BR><P>
-<H3>Maximum Stack Usage =        304 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        448 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-__rt_entry_main &rArr; main &rArr; PCD_PerformSelfTest &rArr; PCD_ReadMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+__rt_entry_main &rArr; main &rArr; PICC_ReadCardSerial &rArr; PICC_Select &rArr; PCD_TransceiveData &rArr; PCD_CommunicateWithPICC &rArr; PCD_CalculateCRC &rArr; PCD_WriteMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 <P>
 <H3>
 Functions with no stack information
@@ -261,8 +261,8 @@ Global Symbols
 <P><STRONG><a name="[169]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[69]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 304 + Unknown Stack Size
-<LI>Call Chain = __rt_entry_main &rArr; main &rArr; PCD_PerformSelfTest &rArr; PCD_ReadMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+<BR><BR>[Stack]<UL><LI>Max Depth = 448 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; PICC_ReadCardSerial &rArr; PICC_Select &rArr; PCD_TransceiveData &rArr; PCD_CommunicateWithPICC &rArr; PCD_CalculateCRC &rArr; PCD_WriteMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -284,33 +284,35 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_exit
 </UL>
 
-<P><STRONG><a name="[16c]"></a>_maybe_terminate_alloc</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, maybetermalloc1.o(.emb_text), UNUSED)
+<P><STRONG><a name="[16c]"></a>_maybe_terminate_alloc</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, maybetermalloc1.o(.emb_text), UNUSED)
 
-<P><STRONG><a name="[6a]"></a>main</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 304 + Unknown Stack Size
-<LI>Call Chain = main &rArr; PCD_PerformSelfTest &rArr; PCD_ReadMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+<P><STRONG><a name="[6a]"></a>main</STRONG> (Thumb, 108 bytes, Stack size 16 bytes, main.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 448 + Unknown Stack Size
+<LI>Call Chain = main &rArr; PICC_ReadCardSerial &rArr; PICC_Select &rArr; PCD_TransceiveData &rArr; PCD_CommunicateWithPICC &rArr; PCD_CalculateCRC &rArr; PCD_WriteMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 <LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_init
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_Init
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_PerformSelfTest
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_ReadCardSerial
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_IsNewCardPresent
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_HaltA
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpDetailsToSerial
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_StopCrypto1
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Init
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_DumpVersionToSerial
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_PriorityGroupConfig
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Init
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Blink
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Blink
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[7b]"></a>assert_failed</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, main.o(.text))
+<P><STRONG><a name="[7d]"></a>assert_failed</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128 + Unknown Stack Size
 <LI>Call Chain = assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_ClearITPendingBit
 <LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_ClearFlag
@@ -399,14 +401,14 @@ Global Symbols
 <LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Cmd
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_CLKSourceConfig
 <LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
-<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Init
-<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_SendData
-<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_ReceiveData
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_GetFlagStatus
-<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Cmd
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Init
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_SendData
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_ReceiveData
+<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_GetFlagStatus
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Cmd
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_PriorityGroupConfig
 </UL>
 
@@ -414,176 +416,184 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 176 + Unknown Stack Size
 <LI>Call Chain = LED_Init &rArr; GPIO_Init &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[78]"></a>LED_Blink</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, led.o(.text))
+<P><STRONG><a name="[7b]"></a>LED_Blink</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, led.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[7f]"></a>HardSPI_Init</STRONG> (Thumb, 120 bytes, Stack size 32 bytes, spi.o(.text))
+<P><STRONG><a name="[81]"></a>HardSPI_Init</STRONG> (Thumb, 120 bytes, Stack size 32 bytes, spi.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200 + Unknown Stack Size
 <LI>Call Chain = HardSPI_Init &rArr; GPIO_Init &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Init
-<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Cmd
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Init
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Cmd
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Init
 </UL>
 
-<P><STRONG><a name="[82]"></a>SPI_RW</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, spi.o(.text))
+<P><STRONG><a name="[84]"></a>SPI_RW</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, spi.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152 + Unknown Stack Size
 <LI>Call Chain = SPI_RW &rArr; SPI_I2S_SendData &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_SendData
-<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_ReceiveData
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_GetFlagStatus
+<BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_SendData
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_ReceiveData
+<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_GetFlagStatus
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadMultiRegister
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteMultiRegister
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadMultiRegister
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteMultiRegister
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
 </UL>
 
-<P><STRONG><a name="[86]"></a>MFRC522_PinConfig</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, mfrc522.o(.text))
+<P><STRONG><a name="[88]"></a>MFRC522_PinConfig</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, mfrc522.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 176 + Unknown Stack Size
 <LI>Call Chain = MFRC522_PinConfig &rArr; GPIO_Init &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_H
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<BR>[Calls]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_H
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Init
 </UL>
 
-<P><STRONG><a name="[88]"></a>PCD_WriteRegister</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, mfrc522.o(.text))
+<P><STRONG><a name="[8a]"></a>PCD_WriteRegister</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, mfrc522.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168 + Unknown Stack Size
 <LI>Call Chain = PCD_WriteRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_L
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_H
-<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_RW
+<BR>[Calls]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_L
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_H
+<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_RW
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_IsNewCardPresent
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_Select
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SoftPowerUp
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SoftPowerDown
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Reset
-<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_AntennaOn
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ClearRegisterBitMask
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SetRegisterBitMask
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_PerformSelfTest
+<BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_Select
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SoftPowerUp
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SoftPowerDown
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_PerformSelfTest
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Reset
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_AntennaOn
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ClearRegisterBitMask
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SetRegisterBitMask
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_IsNewCardPresent
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Init
 </UL>
 
-<P><STRONG><a name="[8a]"></a>PCD_WriteMultiRegister</STRONG> (Thumb, 46 bytes, Stack size 24 bytes, mfrc522.o(.text))
+<P><STRONG><a name="[8c]"></a>PCD_WriteMultiRegister</STRONG> (Thumb, 46 bytes, Stack size 24 bytes, mfrc522.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 176 + Unknown Stack Size
 <LI>Call Chain = PCD_WriteMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_L
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_H
-<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_RW
+<BR>[Calls]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_L
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_H
+<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_RW
 </UL>
-<BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_PerformSelfTest
+<BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_PerformSelfTest
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
 </UL>
 
-<P><STRONG><a name="[79]"></a>PCD_ReadRegister</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, mfrc522.o(.text))
+<P><STRONG><a name="[8d]"></a>PCD_ReadRegister</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, mfrc522.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168 + Unknown Stack Size
 <LI>Call Chain = PCD_ReadRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_L
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_H
-<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_RW
+<BR>[Calls]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_L
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_H
+<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_RW
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_Select
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SoftPowerUp
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SoftPowerDown
-<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_GetAntennaGain
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Reset
-<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_AntennaOn
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ClearRegisterBitMask
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SetRegisterBitMask
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_PerformSelfTest
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_DumpVersionToSerial
-<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_DumpVersionToSerial
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_Select
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SoftPowerUp
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SoftPowerDown
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_PerformSelfTest
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_GetAntennaGain
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Reset
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_AntennaOn
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ClearRegisterBitMask
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SetRegisterBitMask
 </UL>
 
-<P><STRONG><a name="[8b]"></a>PCD_ReadMultiRegister</STRONG> (Thumb, 108 bytes, Stack size 40 bytes, mfrc522.o(.text))
+<P><STRONG><a name="[8e]"></a>PCD_ReadMultiRegister</STRONG> (Thumb, 108 bytes, Stack size 40 bytes, mfrc522.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 192 + Unknown Stack Size
 <LI>Call Chain = PCD_ReadMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_L
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_H
-<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_RW
+<BR>[Calls]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_L
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_H
+<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_RW
 </UL>
-<BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_PerformSelfTest
-</UL>
-
-<P><STRONG><a name="[8c]"></a>PCD_SetRegisterBitMask</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
-</UL>
-<BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SetAntennaGain
+<BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_PerformSelfTest
 </UL>
 
-<P><STRONG><a name="[8d]"></a>PCD_ClearRegisterBitMask</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<P><STRONG><a name="[8f]"></a>PCD_SetRegisterBitMask</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, mfrc522.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 184 + Unknown Stack Size
+<LI>Call Chain = PCD_SetRegisterBitMask &rArr; PCD_ReadRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_StopCrypto1
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_Select
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_REQA_or_WUPA
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SetAntennaGain
-<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_AntennaOff
+<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
 </UL>
-
-<P><STRONG><a name="[8e]"></a>PCD_CalculateCRC</STRONG> (Thumb, 114 bytes, Stack size 24 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteMultiRegister
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
-</UL>
-<BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_NTAG216_AUTH
-<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_MIFARE_Transceive
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Read
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_HaltA
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_Select
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
+<BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SetAntennaGain
 </UL>
 
-<P><STRONG><a name="[8f]"></a>PCD_AntennaOn</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, mfrc522.o(.text))
+<P><STRONG><a name="[90]"></a>PCD_ClearRegisterBitMask</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, mfrc522.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 184 + Unknown Stack Size
+<LI>Call Chain = PCD_ClearRegisterBitMask &rArr; PCD_ReadRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_Select
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_REQA_or_WUPA
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SetAntennaGain
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_AntennaOff
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_StopCrypto1
+</UL>
+
+<P><STRONG><a name="[91]"></a>PCD_CalculateCRC</STRONG> (Thumb, 114 bytes, Stack size 24 bytes, mfrc522.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 200 + Unknown Stack Size
+<LI>Call Chain = PCD_CalculateCRC &rArr; PCD_WriteMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteMultiRegister
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
+</UL>
+<BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_NTAG216_AUTH
+<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_MIFARE_Transceive
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Read
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_Select
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_HaltA
+</UL>
+
+<P><STRONG><a name="[92]"></a>PCD_AntennaOn</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, mfrc522.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 176 + Unknown Stack Size
-<LI>Call Chain = PCD_AntennaOn &rArr; PCD_WriteRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+<LI>Call Chain = PCD_AntennaOn &rArr; PCD_ReadRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
 </UL>
 <BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Init
 </UL>
 
-<P><STRONG><a name="[90]"></a>PCD_Reset</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, mfrc522.o(.text))
+<P><STRONG><a name="[93]"></a>PCD_Reset</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, mfrc522.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 176 + Unknown Stack Size
-<LI>Call Chain = PCD_Reset &rArr; PCD_WriteRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+<LI>Call Chain = PCD_Reset &rArr; PCD_ReadRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_PerformSelfTest
+<BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_PerformSelfTest
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Init
 </UL>
 
@@ -591,312 +601,337 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 208 + Unknown Stack Size
 <LI>Call Chain = PCD_Init &rArr; HardSPI_Init &rArr; GPIO_Init &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Reset
-<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_AntennaOn
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
-<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_PinConfig
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_H
-<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HardSPI_Init
+<BR>[Calls]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Reset
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_AntennaOn
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_PinConfig
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_H
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HardSPI_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[91]"></a>PCD_AntennaOff</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ClearRegisterBitMask
+<P><STRONG><a name="[94]"></a>PCD_AntennaOff</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ClearRegisterBitMask
 </UL>
 
-<P><STRONG><a name="[92]"></a>PCD_GetAntennaGain</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<P><STRONG><a name="[95]"></a>PCD_GetAntennaGain</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
 </UL>
-<BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SetAntennaGain
-</UL>
-
-<P><STRONG><a name="[93]"></a>PCD_SetAntennaGain</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_GetAntennaGain
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ClearRegisterBitMask
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SetRegisterBitMask
+<BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SetAntennaGain
 </UL>
 
-<P><STRONG><a name="[76]"></a>PCD_PerformSelfTest</STRONG> (Thumb, 202 bytes, Stack size 112 bytes, mfrc522.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 304 + Unknown Stack Size
-<LI>Call Chain = PCD_PerformSelfTest &rArr; PCD_ReadMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
-</UL>
-<BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Reset
-<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadMultiRegister
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteMultiRegister
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
-</UL>
-<BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<P><STRONG><a name="[96]"></a>PCD_SetAntennaGain</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_GetAntennaGain
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ClearRegisterBitMask
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SetRegisterBitMask
 </UL>
 
-<P><STRONG><a name="[95]"></a>PCD_SoftPowerDown</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<P><STRONG><a name="[97]"></a>PCD_PerformSelfTest</STRONG> (Thumb, 202 bytes, Stack size 112 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Reset
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadMultiRegister
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteMultiRegister
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 
-<P><STRONG><a name="[96]"></a>PCD_SoftPowerUp</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<P><STRONG><a name="[99]"></a>PCD_SoftPowerDown</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
 </UL>
 
-<P><STRONG><a name="[97]"></a>PCD_CommunicateWithPICC</STRONG> (Thumb, 370 bytes, Stack size 64 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SetRegisterBitMask
-<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadMultiRegister
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteMultiRegister
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
-</UL>
-<BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_NTAG216_AUTH
-<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_MIFARE_Transceive
-<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Authenticate
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_TransceiveData
+<P><STRONG><a name="[9a]"></a>PCD_SoftPowerUp</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
 
-<P><STRONG><a name="[98]"></a>PCD_TransceiveData</STRONG> (Thumb, 48 bytes, Stack size 56 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
+<P><STRONG><a name="[9b]"></a>PCD_CommunicateWithPICC</STRONG> (Thumb, 370 bytes, Stack size 64 bytes, mfrc522.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 264 + Unknown Stack Size
+<LI>Call Chain = PCD_CommunicateWithPICC &rArr; PCD_CalculateCRC &rArr; PCD_WriteMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_OpenUidBackdoor
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Read
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_HaltA
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_Select
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_REQA_or_WUPA
+<BR>[Calls]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SetRegisterBitMask
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadMultiRegister
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteMultiRegister
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
 </UL>
-
-<P><STRONG><a name="[99]"></a>PICC_REQA_or_WUPA</STRONG> (Thumb, 84 bytes, Stack size 48 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_TransceiveData
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ClearRegisterBitMask
-</UL>
-<BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_WakeupA
-<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_RequestA
-</UL>
-
-<P><STRONG><a name="[9a]"></a>PICC_RequestA</STRONG> (Thumb, 18 bytes, Stack size 16 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_REQA_or_WUPA
-</UL>
-<BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_IsNewCardPresent
+<BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_NTAG216_AUTH
+<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_MIFARE_Transceive
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Authenticate
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_TransceiveData
 </UL>
 
-<P><STRONG><a name="[9b]"></a>PICC_WakeupA</STRONG> (Thumb, 18 bytes, Stack size 16 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_REQA_or_WUPA
+<P><STRONG><a name="[9c]"></a>PCD_TransceiveData</STRONG> (Thumb, 48 bytes, Stack size 56 bytes, mfrc522.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 320 + Unknown Stack Size
+<LI>Call Chain = PCD_TransceiveData &rArr; PCD_CommunicateWithPICC &rArr; PCD_CalculateCRC &rArr; PCD_WriteMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_OpenUidBackdoor
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Read
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_Select
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_REQA_or_WUPA
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_HaltA
+</UL>
+
+<P><STRONG><a name="[9d]"></a>PICC_REQA_or_WUPA</STRONG> (Thumb, 84 bytes, Stack size 48 bytes, mfrc522.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 368 + Unknown Stack Size
+<LI>Call Chain = PICC_REQA_or_WUPA &rArr; PCD_TransceiveData &rArr; PCD_CommunicateWithPICC &rArr; PCD_CalculateCRC &rArr; PCD_WriteMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_TransceiveData
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ClearRegisterBitMask
+</UL>
+<BR>[Called By]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_WakeupA
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_RequestA
+</UL>
+
+<P><STRONG><a name="[9e]"></a>PICC_RequestA</STRONG> (Thumb, 18 bytes, Stack size 16 bytes, mfrc522.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 384 + Unknown Stack Size
+<LI>Call Chain = PICC_RequestA &rArr; PICC_REQA_or_WUPA &rArr; PCD_TransceiveData &rArr; PCD_CommunicateWithPICC &rArr; PCD_CalculateCRC &rArr; PCD_WriteMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_REQA_or_WUPA
+</UL>
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_IsNewCardPresent
+</UL>
+
+<P><STRONG><a name="[9f]"></a>PICC_WakeupA</STRONG> (Thumb, 18 bytes, Stack size 16 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_REQA_or_WUPA
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_SetUid
 </UL>
 
-<P><STRONG><a name="[9c]"></a>PICC_Select</STRONG> (Thumb, 842 bytes, Stack size 104 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_TransceiveData
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ClearRegisterBitMask
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<P><STRONG><a name="[a0]"></a>PICC_Select</STRONG> (Thumb, 842 bytes, Stack size 104 bytes, mfrc522.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 424 + Unknown Stack Size
+<LI>Call Chain = PICC_Select &rArr; PCD_TransceiveData &rArr; PCD_CommunicateWithPICC &rArr; PCD_CalculateCRC &rArr; PCD_WriteMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_ReadCardSerial
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_TransceiveData
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ClearRegisterBitMask
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
 </UL>
-
-<P><STRONG><a name="[9d]"></a>PICC_HaltA</STRONG> (Thumb, 76 bytes, Stack size 24 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_TransceiveData
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
-</UL>
-<BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_OpenUidBackdoor
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpToSerial
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicToSerial
+<BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_ReadCardSerial
 </UL>
 
-<P><STRONG><a name="[9e]"></a>PCD_Authenticate</STRONG> (Thumb, 106 bytes, Stack size 56 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
+<P><STRONG><a name="[79]"></a>PICC_HaltA</STRONG> (Thumb, 76 bytes, Stack size 24 bytes, mfrc522.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 344 + Unknown Stack Size
+<LI>Call Chain = PICC_HaltA &rArr; PCD_TransceiveData &rArr; PCD_CommunicateWithPICC &rArr; PCD_CalculateCRC &rArr; PCD_WriteMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_TransceiveData
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_OpenUidBackdoor
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpToSerial
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicToSerial
+<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[a1]"></a>PCD_Authenticate</STRONG> (Thumb, 106 bytes, Stack size 56 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_SetUid
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicSectorToSerial
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicSectorToSerial
 </UL>
 
-<P><STRONG><a name="[9f]"></a>PCD_StopCrypto1</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ClearRegisterBitMask
+<P><STRONG><a name="[7a]"></a>PCD_StopCrypto1</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, mfrc522.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 192 + Unknown Stack Size
+<LI>Call Chain = PCD_StopCrypto1 &rArr; PCD_ClearRegisterBitMask &rArr; PCD_ReadRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ClearRegisterBitMask
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_SetUid
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicToSerial
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicToSerial
+<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[a0]"></a>MIFARE_Read</STRONG> (Thumb, 68 bytes, Stack size 32 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_TransceiveData
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
+<P><STRONG><a name="[a2]"></a>MIFARE_Read</STRONG> (Thumb, 68 bytes, Stack size 32 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_TransceiveData
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_SetUid
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicSectorToSerial
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareUltralightToSerial
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_GetValue
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicSectorToSerial
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareUltralightToSerial
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_GetValue
 </UL>
 
-<P><STRONG><a name="[a1]"></a>PCD_MIFARE_Transceive</STRONG> (Thumb, 152 bytes, Stack size 72 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
-<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+<P><STRONG><a name="[a3]"></a>PCD_MIFARE_Transceive</STRONG> (Thumb, 152 bytes, Stack size 72 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Transfer
-<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_TwoStepHelper
-<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Ultralight_Write
-<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Write
+<BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Transfer
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_TwoStepHelper
+<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Ultralight_Write
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Write
 </UL>
 
-<P><STRONG><a name="[a3]"></a>MIFARE_Write</STRONG> (Thumb, 68 bytes, Stack size 24 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_MIFARE_Transceive
+<P><STRONG><a name="[a5]"></a>MIFARE_Write</STRONG> (Thumb, 68 bytes, Stack size 24 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_MIFARE_Transceive
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_UnbrickUidSector
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_SetUid
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_SetValue
+<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_SetValue
 </UL>
 
-<P><STRONG><a name="[a4]"></a>MIFARE_Ultralight_Write</STRONG> (Thumb, 60 bytes, Stack size 32 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_MIFARE_Transceive
+<P><STRONG><a name="[a6]"></a>MIFARE_Ultralight_Write</STRONG> (Thumb, 60 bytes, Stack size 32 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_MIFARE_Transceive
 </UL>
 
-<P><STRONG><a name="[a5]"></a>MIFARE_TwoStepHelper</STRONG> (Thumb, 58 bytes, Stack size 32 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_MIFARE_Transceive
+<P><STRONG><a name="[a7]"></a>MIFARE_TwoStepHelper</STRONG> (Thumb, 58 bytes, Stack size 32 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_MIFARE_Transceive
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Restore
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Increment
-<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Decrement
-</UL>
-
-<P><STRONG><a name="[a6]"></a>MIFARE_Decrement</STRONG> (Thumb, 18 bytes, Stack size 16 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_TwoStepHelper
+<BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Restore
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Increment
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Decrement
 </UL>
 
-<P><STRONG><a name="[a7]"></a>MIFARE_Increment</STRONG> (Thumb, 18 bytes, Stack size 16 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_TwoStepHelper
+<P><STRONG><a name="[a8]"></a>MIFARE_Decrement</STRONG> (Thumb, 18 bytes, Stack size 16 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_TwoStepHelper
 </UL>
 
-<P><STRONG><a name="[a8]"></a>MIFARE_Restore</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_TwoStepHelper
+<P><STRONG><a name="[a9]"></a>MIFARE_Increment</STRONG> (Thumb, 18 bytes, Stack size 16 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_TwoStepHelper
 </UL>
 
-<P><STRONG><a name="[a9]"></a>MIFARE_Transfer</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_MIFARE_Transceive
+<P><STRONG><a name="[aa]"></a>MIFARE_Restore</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_TwoStepHelper
 </UL>
 
-<P><STRONG><a name="[aa]"></a>MIFARE_GetValue</STRONG> (Thumb, 62 bytes, Stack size 40 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Read
+<P><STRONG><a name="[ab]"></a>MIFARE_Transfer</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_MIFARE_Transceive
 </UL>
 
-<P><STRONG><a name="[ab]"></a>MIFARE_SetValue</STRONG> (Thumb, 134 bytes, Stack size 32 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Write
+<P><STRONG><a name="[ac]"></a>MIFARE_GetValue</STRONG> (Thumb, 62 bytes, Stack size 40 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Read
 </UL>
 
-<P><STRONG><a name="[ac]"></a>PCD_NTAG216_AUTH</STRONG> (Thumb, 118 bytes, Stack size 72 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
+<P><STRONG><a name="[ad]"></a>MIFARE_SetValue</STRONG> (Thumb, 134 bytes, Stack size 32 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Write
 </UL>
 
-<P><STRONG><a name="[ae]"></a>GetStatusCodeName</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, mfrc522.o(.text), UNUSED)
+<P><STRONG><a name="[ae]"></a>PCD_NTAG216_AUTH</STRONG> (Thumb, 118 bytes, Stack size 72 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CommunicateWithPICC
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_CalculateCRC
+</UL>
+
+<P><STRONG><a name="[b1]"></a>GetStatusCodeName</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, mfrc522.o(.text), UNUSED)
 <BR><BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_UnbrickUidSector
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_SetUid
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_OpenUidBackdoor
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicSectorToSerial
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareUltralightToSerial
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_OpenUidBackdoor
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicSectorToSerial
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareUltralightToSerial
 </UL>
 
-<P><STRONG><a name="[b3]"></a>PICC_GetTypeName</STRONG> (Thumb, 96 bytes, Stack size 0 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpDetailsToSerial
+<P><STRONG><a name="[b5]"></a>PICC_GetTypeName</STRONG> (Thumb, 96 bytes, Stack size 0 bytes, mfrc522.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpDetailsToSerial
 </UL>
 
-<P><STRONG><a name="[75]"></a>PCD_DumpVersionToSerial</STRONG> (Thumb, 114 bytes, Stack size 8 bytes, mfrc522.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 176 + Unknown Stack Size
-<LI>Call Chain = PCD_DumpVersionToSerial &rArr; PCD_ReadRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
-</UL>
-<BR>[Calls]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-</UL>
-<BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<P><STRONG><a name="[af]"></a>PCD_DumpVersionToSerial</STRONG> (Thumb, 114 bytes, Stack size 8 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 
-<P><STRONG><a name="[ad]"></a>PICC_DumpMifareUltralightToSerial</STRONG> (Thumb, 188 bytes, Stack size 48 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetStatusCodeName
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Read
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<P><STRONG><a name="[b0]"></a>PICC_DumpMifareUltralightToSerial</STRONG> (Thumb, 188 bytes, Stack size 48 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetStatusCodeName
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Read
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpToSerial
-</UL>
-
-<P><STRONG><a name="[af]"></a>PICC_DumpMifareClassicSectorToSerial</STRONG> (Thumb, 1488 bytes, Stack size 112 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetStatusCodeName
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Read
-<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Authenticate
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-</UL>
-<BR>[Called By]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicToSerial
+<BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpToSerial
 </UL>
 
-<P><STRONG><a name="[b0]"></a>PICC_DumpMifareClassicToSerial</STRONG> (Thumb, 86 bytes, Stack size 24 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicSectorToSerial
-<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_StopCrypto1
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_HaltA
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<P><STRONG><a name="[b2]"></a>PICC_DumpMifareClassicSectorToSerial</STRONG> (Thumb, 1488 bytes, Stack size 112 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetStatusCodeName
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Read
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Authenticate
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpToSerial
-</UL>
-
-<P><STRONG><a name="[b1]"></a>PICC_DumpDetailsToSerial</STRONG> (Thumb, 128 bytes, Stack size 16 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_GetTypeName
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_GetType
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-</UL>
-<BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpToSerial
+<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicToSerial
 </UL>
 
-<P><STRONG><a name="[b4]"></a>PICC_DumpToSerial</STRONG> (Thumb, 142 bytes, Stack size 24 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpDetailsToSerial
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicToSerial
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareUltralightToSerial
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_HaltA
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_GetType
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<P><STRONG><a name="[b3]"></a>PICC_DumpMifareClassicToSerial</STRONG> (Thumb, 86 bytes, Stack size 24 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicSectorToSerial
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_HaltA
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_StopCrypto1
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpToSerial
+</UL>
+
+<P><STRONG><a name="[78]"></a>PICC_DumpDetailsToSerial</STRONG> (Thumb, 128 bytes, Stack size 16 bytes, mfrc522.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
+<LI>Call Chain = PICC_DumpDetailsToSerial &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_GetTypeName
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_GetType
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpToSerial
+<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[b6]"></a>PICC_DumpToSerial</STRONG> (Thumb, 142 bytes, Stack size 24 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicToSerial
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareUltralightToSerial
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_GetType
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_HaltA
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpDetailsToSerial
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 
 <P><STRONG><a name="[16d]"></a>MIFARE_SetAccessBits</STRONG> (Thumb, 352 bytes, Stack size 24 bytes, mfrc522.o(.text), UNUSED)
 
-<P><STRONG><a name="[b5]"></a>MIFARE_OpenUidBackdoor</STRONG> (Thumb, 240 bytes, Stack size 72 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetStatusCodeName
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_HaltA
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_TransceiveData
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<P><STRONG><a name="[b7]"></a>MIFARE_OpenUidBackdoor</STRONG> (Thumb, 240 bytes, Stack size 72 bytes, mfrc522.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetStatusCodeName
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_TransceiveData
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_HaltA
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_UnbrickUidSector
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_SetUid
 </UL>
 
-<P><STRONG><a name="[b6]"></a>PICC_ReadCardSerial</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_Select
+<P><STRONG><a name="[77]"></a>PICC_ReadCardSerial</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, mfrc522.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 432 + Unknown Stack Size
+<LI>Call Chain = PICC_ReadCardSerial &rArr; PICC_Select &rArr; PCD_TransceiveData &rArr; PCD_CommunicateWithPICC &rArr; PCD_CalculateCRC &rArr; PCD_WriteMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_Select
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_SetUid
+<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[b7]"></a>PICC_IsNewCardPresent</STRONG> (Thumb, 54 bytes, Stack size 16 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_RequestA
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
+<P><STRONG><a name="[76]"></a>PICC_IsNewCardPresent</STRONG> (Thumb, 54 bytes, Stack size 16 bytes, mfrc522.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 400 + Unknown Stack Size
+<LI>Call Chain = PICC_IsNewCardPresent &rArr; PICC_RequestA &rArr; PICC_REQA_or_WUPA &rArr; PCD_TransceiveData &rArr; PCD_CommunicateWithPICC &rArr; PCD_CalculateCRC &rArr; PCD_WriteMultiRegister &rArr; MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_RequestA
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_SetUid
+<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[b8]"></a>MIFARE_SetUid</STRONG> (Thumb, 342 bytes, Stack size 72 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_IsNewCardPresent
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_ReadCardSerial
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_OpenUidBackdoor
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetStatusCodeName
-<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Write
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Read
-<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_StopCrypto1
-<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Authenticate
-<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_WakeupA
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<BR><BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_OpenUidBackdoor
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetStatusCodeName
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Write
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Read
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Authenticate
+<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_WakeupA
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_ReadCardSerial
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_IsNewCardPresent
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_StopCrypto1
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 
 <P><STRONG><a name="[b9]"></a>MIFARE_UnbrickUidSector</STRONG> (Thumb, 68 bytes, Stack size 32 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_OpenUidBackdoor
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetStatusCodeName
-<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Write
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<BR><BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_OpenUidBackdoor
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetStatusCodeName
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_Write
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 
 <P><STRONG><a name="[71]"></a>delay_init</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, delay.o(.text))
@@ -910,10 +945,10 @@ Global Symbols
 
 <P><STRONG><a name="[16e]"></a>delay_us</STRONG> (Thumb, 72 bytes, Stack size 0 bytes, delay.o(.text), UNUSED)
 
-<P><STRONG><a name="[7a]"></a>delay_ms</STRONG> (Thumb, 72 bytes, Stack size 0 bytes, delay.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SoftPowerUp
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Reset
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<P><STRONG><a name="[7c]"></a>delay_ms</STRONG> (Thumb, 72 bytes, Stack size 0 bytes, delay.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_SoftPowerUp
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Reset
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -942,8 +977,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Init
 <LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Cmd
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1051,49 +1086,49 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
 <LI>Call Chain = NVIC_PriorityGroupConfig &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[c9]"></a>NVIC_Init</STRONG> (Thumb, 158 bytes, Stack size 24 bytes, misc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[ca]"></a>NVIC_SetVectorTable</STRONG> (Thumb, 60 bytes, Stack size 16 bytes, misc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[cb]"></a>NVIC_SystemLPConfig</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, misc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[bb]"></a>SysTick_CLKSourceConfig</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, misc.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
 <LI>Call Chain = SysTick_CLKSourceConfig &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 <BR>[Called By]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_init
 </UL>
 
 <P><STRONG><a name="[cc]"></a>GPIO_DeInit</STRONG> (Thumb, 224 bytes, Stack size 8 bytes, stm32f10x_gpio.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphResetCmd
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[ce]"></a>GPIO_AFIODeInit</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, stm32f10x_gpio.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphResetCmd
 </UL>
 
-<P><STRONG><a name="[7d]"></a>GPIO_Init</STRONG> (Thumb, 378 bytes, Stack size 40 bytes, stm32f10x_gpio.o(.text))
+<P><STRONG><a name="[7f]"></a>GPIO_Init</STRONG> (Thumb, 378 bytes, Stack size 40 bytes, stm32f10x_gpio.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168 + Unknown Stack Size
 <LI>Call Chain = GPIO_Init &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
-<BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_PinConfig
-<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HardSPI_Init
+<BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_PinConfig
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HardSPI_Init
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_Init
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Init
 </UL>
@@ -1101,29 +1136,29 @@ Global Symbols
 <P><STRONG><a name="[172]"></a>GPIO_StructInit</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f10x_gpio.o(.text), UNUSED)
 
 <P><STRONG><a name="[cf]"></a>GPIO_ReadInputDataBit</STRONG> (Thumb, 170 bytes, Stack size 16 bytes, stm32f10x_gpio.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[d0]"></a>GPIO_ReadInputData</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, stm32f10x_gpio.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[d1]"></a>GPIO_ReadOutputDataBit</STRONG> (Thumb, 256 bytes, Stack size 16 bytes, stm32f10x_gpio.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[d2]"></a>GPIO_ReadOutputData</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, stm32f10x_gpio.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
-<P><STRONG><a name="[7e]"></a>GPIO_SetBits</STRONG> (Thumb, 86 bytes, Stack size 16 bytes, stm32f10x_gpio.o(.text))
+<P><STRONG><a name="[80]"></a>GPIO_SetBits</STRONG> (Thumb, 86 bytes, Stack size 16 bytes, stm32f10x_gpio.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
 <LI>Call Chain = GPIO_SetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
-<BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_PinConfig
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_H
+<BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_PinConfig
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_H
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Init
 </UL>
 
@@ -1131,51 +1166,51 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
 <LI>Call Chain = GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
-<BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_L
+<BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_SS_L
 </UL>
 
 <P><STRONG><a name="[d3]"></a>GPIO_WriteBit</STRONG> (Thumb, 188 bytes, Stack size 16 bytes, stm32f10x_gpio.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[d4]"></a>GPIO_Write</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, stm32f10x_gpio.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[d5]"></a>GPIO_PinLockConfig</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, stm32f10x_gpio.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[d6]"></a>GPIO_EventOutputConfig</STRONG> (Thumb, 138 bytes, Stack size 16 bytes, stm32f10x_gpio.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[d7]"></a>GPIO_EventOutputCmd</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, stm32f10x_gpio.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[d8]"></a>GPIO_PinRemapConfig</STRONG> (Thumb, 552 bytes, Stack size 32 bytes, stm32f10x_gpio.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[d9]"></a>GPIO_EXTILineConfig</STRONG> (Thumb, 186 bytes, Stack size 16 bytes, stm32f10x_gpio.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[da]"></a>GPIO_ETH_MediaInterfaceConfig</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, stm32f10x_gpio.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[173]"></a>RCC_DeInit</STRONG> (Thumb, 64 bytes, Stack size 0 bytes, stm32f10x_rcc.o(.text), UNUSED)
 
 <P><STRONG><a name="[db]"></a>RCC_HSEConfig</STRONG> (Thumb, 100 bytes, Stack size 8 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[dc]"></a>RCC_GetFlagStatus</STRONG> (Thumb, 118 bytes, Stack size 24 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 <BR>[Called By]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_WaitForHSEStartUp
 </UL>
@@ -1185,65 +1220,65 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[de]"></a>RCC_AdjustHSICalibrationValue</STRONG> (Thumb, 38 bytes, Stack size 16 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[df]"></a>RCC_HSICmd</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[e0]"></a>RCC_PLLConfig</STRONG> (Thumb, 152 bytes, Stack size 16 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[e1]"></a>RCC_PLLCmd</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[e2]"></a>RCC_SYSCLKConfig</STRONG> (Thumb, 42 bytes, Stack size 16 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[174]"></a>RCC_GetSYSCLKSource</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f10x_rcc.o(.text), UNUSED)
 
 <P><STRONG><a name="[e3]"></a>RCC_HCLKConfig</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[e4]"></a>RCC_PCLK1Config</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[e5]"></a>RCC_PCLK2Config</STRONG> (Thumb, 60 bytes, Stack size 16 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[e6]"></a>RCC_ITConfig</STRONG> (Thumb, 70 bytes, Stack size 16 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[e7]"></a>RCC_USBCLKConfig</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[e8]"></a>RCC_ADCCLKConfig</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[e9]"></a>RCC_LSEConfig</STRONG> (Thumb, 146 bytes, Stack size 8 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[ea]"></a>RCC_LSICmd</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[eb]"></a>RCC_RTCCLKConfig</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[ec]"></a>RCC_RTCCLKCmd</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[f7]"></a>RCC_GetClocksFreq</STRONG> (Thumb, 208 bytes, Stack size 12 bytes, stm32f10x_rcc.o(.text))
@@ -1254,27 +1289,27 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[ed]"></a>RCC_AHBPeriphClockCmd</STRONG> (Thumb, 86 bytes, Stack size 16 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
-<P><STRONG><a name="[7c]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, stm32f10x_rcc.o(.text))
+<P><STRONG><a name="[7e]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, stm32f10x_rcc.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
 <LI>Call Chain = RCC_APB2PeriphClockCmd &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
-<BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_PinConfig
-<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HardSPI_Init
+<BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_PinConfig
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HardSPI_Init
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_Init
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Init
 </UL>
 
 <P><STRONG><a name="[ee]"></a>RCC_APB1PeriphClockCmd</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[cd]"></a>RCC_APB2PeriphResetCmd</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 <BR>[Called By]<UL><LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_DeInit
 <LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_DeInit
@@ -1283,154 +1318,154 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[ef]"></a>RCC_APB1PeriphResetCmd</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 <BR>[Called By]<UL><LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_DeInit
 <LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_DeInit
 </UL>
 
 <P><STRONG><a name="[f0]"></a>RCC_BackupResetCmd</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[f1]"></a>RCC_ClockSecuritySystemCmd</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[f2]"></a>RCC_MCOConfig</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[175]"></a>RCC_ClearFlag</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_rcc.o(.text), UNUSED)
 
 <P><STRONG><a name="[f3]"></a>RCC_GetITStatus</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[f4]"></a>RCC_ClearITPendingBit</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[f5]"></a>SPI_I2S_DeInit</STRONG> (Thumb, 104 bytes, Stack size 8 bytes, stm32f10x_spi.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphResetCmd
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphResetCmd
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
-<P><STRONG><a name="[80]"></a>SPI_Init</STRONG> (Thumb, 328 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text))
+<P><STRONG><a name="[82]"></a>SPI_Init</STRONG> (Thumb, 328 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
 <LI>Call Chain = SPI_Init &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HardSPI_Init
+<BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HardSPI_Init
 </UL>
 
 <P><STRONG><a name="[f6]"></a>I2S_Init</STRONG> (Thumb, 434 bytes, Stack size 56 bytes, stm32f10x_spi.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_GetClocksFreq
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[176]"></a>SPI_StructInit</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f10x_spi.o(.text), UNUSED)
 
 <P><STRONG><a name="[177]"></a>I2S_StructInit</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f10x_spi.o(.text), UNUSED)
 
-<P><STRONG><a name="[81]"></a>SPI_Cmd</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text))
+<P><STRONG><a name="[83]"></a>SPI_Cmd</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
 <LI>Call Chain = SPI_Cmd &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HardSPI_Init
+<BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HardSPI_Init
 </UL>
 
 <P><STRONG><a name="[f8]"></a>I2S_Cmd</STRONG> (Thumb, 148 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[f9]"></a>SPI_I2S_ITConfig</STRONG> (Thumb, 126 bytes, Stack size 24 bytes, stm32f10x_spi.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[fa]"></a>SPI_I2S_DMACmd</STRONG> (Thumb, 102 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
-<P><STRONG><a name="[84]"></a>SPI_I2S_SendData</STRONG> (Thumb, 42 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text))
+<P><STRONG><a name="[86]"></a>SPI_I2S_SendData</STRONG> (Thumb, 42 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
 <LI>Call Chain = SPI_I2S_SendData &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
-<BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_RW
+<BR>[Called By]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_RW
 </UL>
 
-<P><STRONG><a name="[85]"></a>SPI_I2S_ReceiveData</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, stm32f10x_spi.o(.text))
+<P><STRONG><a name="[87]"></a>SPI_I2S_ReceiveData</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, stm32f10x_spi.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
 <LI>Call Chain = SPI_I2S_ReceiveData &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
-<BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_RW
+<BR>[Called By]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_RW
 </UL>
 
 <P><STRONG><a name="[fb]"></a>SPI_NSSInternalSoftwareConfig</STRONG> (Thumb, 96 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[fc]"></a>SPI_SSOutputCmd</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[fd]"></a>SPI_DataSizeConfig</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[fe]"></a>SPI_TransmitCRC</STRONG> (Thumb, 46 bytes, Stack size 8 bytes, stm32f10x_spi.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[ff]"></a>SPI_CalculateCRC</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[100]"></a>SPI_GetCRC</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[101]"></a>SPI_GetCRCPolynomial</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, stm32f10x_spi.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[102]"></a>SPI_BiDirectionalLineConfig</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
-<P><STRONG><a name="[83]"></a>SPI_I2S_GetFlagStatus</STRONG> (Thumb, 114 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text))
+<P><STRONG><a name="[85]"></a>SPI_I2S_GetFlagStatus</STRONG> (Thumb, 114 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
 <LI>Call Chain = SPI_I2S_GetFlagStatus &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
-<BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_RW
+<BR>[Called By]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_RW
 </UL>
 
 <P><STRONG><a name="[103]"></a>SPI_I2S_ClearFlag</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[104]"></a>SPI_I2S_GetITStatus</STRONG> (Thumb, 138 bytes, Stack size 32 bytes, stm32f10x_spi.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[105]"></a>SPI_I2S_ClearITPendingBit</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, stm32f10x_spi.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[106]"></a>USART_DeInit</STRONG> (Thumb, 174 bytes, Stack size 8 bytes, stm32f10x_usart.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphResetCmd
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphResetCmd
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[c1]"></a>USART_Init</STRONG> (Thumb, 450 bytes, Stack size 56 bytes, stm32f10x_usart.o(.text))
@@ -1438,7 +1473,7 @@ Global Symbols
 <LI>Call Chain = USART_Init &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_GetClocksFreq
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 <BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_Init
 </UL>
@@ -1446,7 +1481,7 @@ Global Symbols
 <P><STRONG><a name="[178]"></a>USART_StructInit</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f10x_usart.o(.text), UNUSED)
 
 <P><STRONG><a name="[107]"></a>USART_ClockInit</STRONG> (Thumb, 162 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[179]"></a>USART_ClockStructInit</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f10x_usart.o(.text), UNUSED)
@@ -1455,44 +1490,44 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
 <LI>Call Chain = USART_Cmd &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 <BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_Init
 </UL>
 
 <P><STRONG><a name="[108]"></a>USART_ITConfig</STRONG> (Thumb, 336 bytes, Stack size 32 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[109]"></a>USART_DMACmd</STRONG> (Thumb, 114 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[10a]"></a>USART_SetAddress</STRONG> (Thumb, 86 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[10b]"></a>USART_WakeUpConfig</STRONG> (Thumb, 90 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[10c]"></a>USART_ReceiverWakeUpCmd</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[10d]"></a>USART_LINBreakDetectLengthConfig</STRONG> (Thumb, 88 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[10e]"></a>USART_LINCmd</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[c0]"></a>USART_SendData</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
 <LI>Call Chain = USART_SendData &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 <BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_write
 </UL>
@@ -1501,77 +1536,77 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
 <LI>Call Chain = USART_ReceiveData &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 <BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_IRQHandler
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_read
 </UL>
 
 <P><STRONG><a name="[10f]"></a>USART_SendBreak</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[110]"></a>USART_SetGuardTime</STRONG> (Thumb, 54 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[111]"></a>USART_SetPrescaler</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[112]"></a>USART_SmartCardCmd</STRONG> (Thumb, 102 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[113]"></a>USART_SmartCardNACKCmd</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[114]"></a>USART_HalfDuplexCmd</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[115]"></a>USART_OverSampling8Cmd</STRONG> (Thumb, 92 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[116]"></a>USART_OneBitMethodCmd</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[117]"></a>USART_IrDAConfig</STRONG> (Thumb, 88 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[118]"></a>USART_IrDACmd</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[bd]"></a>USART_GetFlagStatus</STRONG> (Thumb, 164 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
 <LI>Call Chain = USART_GetFlagStatus &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 <BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_write
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_read
 </UL>
 
 <P><STRONG><a name="[119]"></a>USART_ClearFlag</STRONG> (Thumb, 122 bytes, Stack size 16 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[c3]"></a>USART_GetITStatus</STRONG> (Thumb, 280 bytes, Stack size 32 bytes, stm32f10x_usart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160 + Unknown Stack Size
 <LI>Call Chain = USART_GetITStatus &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 <BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_IRQHandler
 </UL>
 
 <P><STRONG><a name="[11a]"></a>USART_ClearITPendingBit</STRONG> (Thumb, 158 bytes, Stack size 24 bytes, stm32f10x_usart.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<BR><BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
 <P><STRONG><a name="[a]"></a>Reset_Handler</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, startup_stm32f10x_hd.o(.text))
@@ -1764,7 +1799,7 @@ Global Symbols
 
 <P><STRONG><a name="[17a]"></a>__use_no_semihosting</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, use_no_semi_2.o(.text), UNUSED)
 
-<P><STRONG><a name="[77]"></a>__2printf</STRONG> (Thumb, 20 bytes, Stack size 24 bytes, noretval__2printf.o(.text))
+<P><STRONG><a name="[75]"></a>__2printf</STRONG> (Thumb, 20 bytes, Stack size 24 bytes, noretval__2printf.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128 + Unknown Stack Size
 <LI>Call Chain = __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -1772,14 +1807,14 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_UnbrickUidSector
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_SetUid
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_OpenUidBackdoor
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpToSerial
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpDetailsToSerial
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicToSerial
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicSectorToSerial
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareUltralightToSerial
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_DumpVersionToSerial
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MIFARE_OpenUidBackdoor
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpToSerial
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicToSerial
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareClassicSectorToSerial
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpMifareUltralightToSerial
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_DumpVersionToSerial
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpDetailsToSerial
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -1816,8 +1851,8 @@ Global Symbols
 
 <P><STRONG><a name="[17b]"></a>_printf_longlong_hex</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, _printf_hex_int.o(.text), UNUSED)
 
-<P><STRONG><a name="[a2]"></a>__aeabi_memcpy</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memcpy_v6.o(.text), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_MIFARE_Transceive
+<P><STRONG><a name="[a4]"></a>__aeabi_memcpy</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memcpy_v6.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_MIFARE_Transceive
 </UL>
 
 <P><STRONG><a name="[11f]"></a>__rt_memcpy</STRONG> (Thumb, 138 bytes, Stack size 0 bytes, rt_memcpy_v6.o(.text), UNUSED)
@@ -1826,10 +1861,10 @@ Global Symbols
 
 <P><STRONG><a name="[17c]"></a>_memcpy_lastbytes</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memcpy_v6.o(.text), UNUSED)
 
-<P><STRONG><a name="[94]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 4 bytes, rt_memclr_w.o(.text))
+<P><STRONG><a name="[98]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 4 bytes, rt_memclr_w.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = __aeabi_memclr4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_PerformSelfTest
+<BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_PerformSelfTest
 <LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fclose_internal
 <LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fopen
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_initio
@@ -1886,7 +1921,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ferror
 <LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_common
 </UL>
-<BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 
 <P><STRONG><a name="[120]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, rt_memcpy_w.o(.text), UNUSED)
@@ -1919,7 +1954,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_SIGRTRED
 <LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;freopen
 <LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setvbuf
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init_stdio_2
 </UL>
@@ -1992,7 +2027,7 @@ Global Symbols
 <P><STRONG><a name="[137]"></a>fopen</STRONG> (Thumb, 74 bytes, Stack size 24 bytes, fopen.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 <LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;freopen
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 
 <P><STRONG><a name="[129]"></a>_fclose_internal</STRONG> (Thumb, 76 bytes, Stack size 32 bytes, fclose.o(.text))
@@ -2002,7 +2037,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_close
 <LI><a href="#[138]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fflush
 <LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;freopen
 <LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_terminateio
@@ -2217,35 +2252,35 @@ Global Symbols
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[b2]"></a>PICC_GetType</STRONG> (Thumb, 90 bytes, Stack size 0 bytes, mfrc522.o(.text), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpToSerial
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpDetailsToSerial
+<P><STRONG><a name="[b4]"></a>PICC_GetType</STRONG> (Thumb, 90 bytes, Stack size 0 bytes, mfrc522.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpToSerial
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PICC_DumpDetailsToSerial
 </UL>
 
-<P><STRONG><a name="[87]"></a>MFRC522_SS_H</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, mfrc522.o(.text))
+<P><STRONG><a name="[89]"></a>MFRC522_SS_H</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, mfrc522.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152 + Unknown Stack Size
 <LI>Call Chain = MFRC522_SS_H &rArr; GPIO_SetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
+<BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadMultiRegister
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteMultiRegister
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
-<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_PinConfig
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadMultiRegister
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteMultiRegister
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MFRC522_PinConfig
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_Init
 </UL>
 
-<P><STRONG><a name="[89]"></a>MFRC522_SS_L</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, mfrc522.o(.text))
+<P><STRONG><a name="[8b]"></a>MFRC522_SS_L</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, mfrc522.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152 + Unknown Stack Size
 <LI>Call Chain = MFRC522_SS_L &rArr; GPIO_ResetBits &rArr; assert_failed &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadMultiRegister
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteMultiRegister
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadMultiRegister
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_ReadRegister
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteMultiRegister
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCD_WriteRegister
 </UL>
 
 <P><STRONG><a name="[c8]"></a>SetSysClockTo72</STRONG> (Thumb, 214 bytes, Stack size 12 bytes, system_stm32f10x.o(.text))
