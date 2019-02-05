@@ -178,9 +178,9 @@ enum MIFARE_Misc {
 	MF_KEY_SIZE				= 6			// A Mifare Crypto1 key is 6 bytes.
 };
 
-// PICC types we can detect. Remember to update PICC_GetTypeName() if you add more.
+// PICC types we can detect. Remember to update PICC_GetTypeName(void) if you add more.
 // last value set to 0xff, then compiler uses less ram, it seems some optimisations are triggered
-enum PICC_Type {
+typedef enum {
 	PICC_TYPE_UNKNOWN		,
 	PICC_TYPE_ISO_14443_4	,	// PICC compliant with ISO/IEC 14443-4 
 	PICC_TYPE_ISO_18092		, 	// PICC compliant with ISO/IEC 18092 (NFC)
@@ -192,9 +192,9 @@ enum PICC_Type {
 	PICC_TYPE_MIFARE_DESFIRE,	// MIFARE DESFire
 	PICC_TYPE_TNP3XXX		,	// Only mentioned in NXP AN 10833 MIFARE Type Identification Procedure
 	PICC_TYPE_NOT_COMPLETE	= 0xff	// SAK indicates UID is not complete.
-};
+} PICC_Type;
 
-// Return codes from the functions in this class. Remember to update GetStatusCodeName() if you add more.
+// Return codes from the functions in this class. Remember to update GetStatusCodeName(void) if you add more.
 // last value set to 0xff, then compiler uses less ram, it seems some optimisations are triggered
 typedef enum {
 	STATUS_OK				,	// Success
@@ -274,6 +274,61 @@ StatusCode PICC_Seclect(Uid *uid, uint8_t validBits);
 StatusCode PICC_HaltA(void);
 
 
+/////////////////////////////////////////////////////////////////////////////////////
+// Functions for communicating with MIFARE PICCs
+/////////////////////////////////////////////////////////////////////////////////////
+
+StatusCode PCD_Authenticate(uint8_t command, uint8_t blockAddr, MIFARE_Key *key, Uid *uid);
+void PCD_StopCrypto1(void);
+StatusCode MIFARE_Read(uint8_t blockAddr, uint8_t *buffer, uint8_t *bufferSize);
+StatusCode MIFARE_Write(uint8_t blockAddr, uint8_t *buffer, uint8_t bufferSize);
+StatusCode MIFARE_Ultralight_Write(uint8_t page, uint8_t *buffer, uint8_t bufferSize);
+StatusCode MIFARE_Decrement(uint8_t blockAddr, int32_t delta);
+StatusCode MIFARE_Increment(uint8_t blockAddr, int32_t delta);
+StatusCode MIFARE_Restore(uint8_t blockAddr);
+StatusCode MIFARE_Transfer(uint8_t blockAddr);
+StatusCode MIFARE_GetValue(uint8_t blockAddr, int32_t *value);
+StatusCode MIFARE_SetValue(uint8_t blockAddr, int32_t value);
+StatusCode PCD_NTAG216_AUTH(uint8_t *passWord, uint8_t pACK[]);
+	
+StatusCode MIFARE_TwoStepHelper(uint8_t command, uint8_t blockAddr, int32_t data);
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+// Support functions
+/////////////////////////////////////////////////////////////////////////////////////
+StatusCode PCD_MIFARE_Transceive(uint8_t *sendData, uint8_t sendLen, _Bool acceptTimeout);
+// old function used too much memory, now name moved to flash; if you need char, copy from flash to memory
+//const char *GetStatusCodeName(uint8_t code);
+char *GetStatusCodeName(StatusCode code);
+static PICC_Type PICC_GetType(uint8_t sak);
+// old function used too much memory, now name moved to flash; if you need char, copy from flash to memory
+//const char *PICC_GetTypeName(uint8_t type);
+char *PICC_GetTypeName(PICC_Type type);
+
+// Support functions for debuging
+void PCD_DumpVersionToSerial(void);
+void PICC_DumpToSerial(Uid *uid);
+void PICC_DumpDetailsToSerial(Uid *uid);
+void PICC_DumpMifareClassicToSerial(Uid *uid, PICC_Type piccType, MIFARE_Key *key);
+void PICC_DumpMifareClassicSectorToSerial(Uid *uid, MIFARE_Key *key, uint8_t sector);
+void PICC_DumpMifareUltralightToSerial(void);
+
+// Advanced functions for MIFARE
+// DEPRECATED_MSG("name will change in next version")
+void MIFARE_SetAccessBits(uint8_t *accessBitBuffer, uint8_t g0, uint8_t g1, uint8_t g2, uint8_t g3);
+// DEPRECATED_MSG("will move to extra class in next version")
+_Bool MIFARE_OpenUidBackdoor(_Bool logErrors);
+// DEPRECATED_MSG("will move to extra class in next version")
+_Bool MIFARE_SetUid(uint8_t *newUid, uint8_t uidSize, _Bool logErrors);
+// DEPRECATED_MSG("will move to extra class in next version")
+_Bool MIFARE_UnbrickUidSector(_Bool logErrors);
+
+/////////////////////////////////////////////////////////////////////////////////////
+// Convenience functions - does not add extra functionality
+/////////////////////////////////////////////////////////////////////////////////////
+_Bool PICC_IsNewCardPresent(void);
+_Bool PICC_ReadCardSerial(void);
 
 
 #endif

@@ -17,7 +17,9 @@ int main(void)
 
     PCD_Init();
 
-    printf("res %d\r\n", PCD_PerformSelfTest());
+    PCD_DumpVersionToSerial();
+
+    printf("result = %d", PCD_PerformSelfTest());
 
     while (1)
     {
