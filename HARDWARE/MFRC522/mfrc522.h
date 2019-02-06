@@ -3,17 +3,15 @@
 
 #include "sys.h"
 #include "spi.h"
-#include <stdint.h>
-#include <stdbool.h>
 
 // PCD: Proximity coupling device
 // PICC: Proximity Integrated Circuit Card
 
 // Set SS and RST Pin info
-#define MFRC522_SS_RST_PORT GPIOA
-#define MFRC522_SS_RST_RCC RCC_APB2Periph_GPIOA
-#define MFRC522_SS_PIN GPIO_Pin_3
-#define MFRC522_RST_PIN GPIO_Pin_3
+#define MFRC522_SS_RST_PORT GPIOB
+#define MFRC522_SS_RST_RCC RCC_APB2Periph_GPIOB
+#define MFRC522_SS_PIN GPIO_Pin_1
+#define MFRC522_RST_PIN GPIO_Pin_2
 
 // Set SS High
 static inline void MFRC522_SS_H(void)

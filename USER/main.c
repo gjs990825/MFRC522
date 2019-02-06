@@ -5,7 +5,6 @@
 #include "led.h"
 #include "delay.h"
 #include "usart.h"
-#include "spi.h"
 #include "mfrc522.h"
 
 int main(void)

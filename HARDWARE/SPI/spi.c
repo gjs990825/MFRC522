@@ -8,13 +8,17 @@ void HardSPI_Init(void)
 
 	RCC_APB2PeriphClockCmd(SPI_GPIO_RCC, ENABLE);
 
-	if (IS_RCC_APB2_PERIPH(SPI_PERIPH_RCC))
+	if (SPI_PERIPH == SPI1)
 	{
-		RCC_APB2PeriphClockCmd(SPI_PERIPH_RCC, ENABLE);
+		RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
 	}
-	else
+	else if (SPI_PERIPH == SPI2)
 	{
-		RCC_APB1PeriphClockCmd(SPI_PERIPH_RCC, ENABLE);
+		RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
+	}
+	else if (SPI_PERIPH == SPI3)
+	{
+		RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
 	}
 
 	/*≈‰÷√ SCK,MISO,MOSI“˝Ω≈ */ 

@@ -2,6 +2,7 @@
 #define _SYS_H_
 
 #include "stm32f10x.h"
+#include <stdbool.h>
 
 #ifdef __cplusplus
 extern "C" {

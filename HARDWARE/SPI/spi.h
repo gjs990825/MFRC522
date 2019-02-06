@@ -3,13 +3,12 @@
 
 #include "sys.h"
 
-#define SPI_PERIPH SPI1
-#define SPI_PERIPH_RCC RCC_APB2Periph_SPI1
-#define SPI_GPIO_PORT GPIOA
-#define SPI_GPIO_RCC RCC_APB2Periph_GPIOA
-#define SPI_SCK_PIN GPIO_Pin_5
-#define SPI_MISO_PIN GPIO_Pin_6
-#define SPI_MOSI_PIN GPIO_Pin_7
+#define SPI_PERIPH SPI2
+#define SPI_GPIO_PORT GPIOB
+#define SPI_GPIO_RCC RCC_APB2Periph_GPIOB
+#define SPI_SCK_PIN GPIO_Pin_13
+#define SPI_MISO_PIN GPIO_Pin_14
+#define SPI_MOSI_PIN GPIO_Pin_15
 
 
 void 	HardSPI_Init(void);
