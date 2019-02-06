@@ -4,6 +4,7 @@
 #include "sys.h"
 #include "spi.h"
 #include <stdint.h>
+#include <stdbool.h>
 
 // PCD: Proximity coupling device
 // PICC: Proximity Integrated Circuit Card
@@ -250,7 +251,7 @@ void PCD_AntennaOn(void);
 void PCD_AntennaOff(void);
 uint8_t PCD_GetAntennaGain(void);
 void PCD_SetAntennaGain(uint8_t mask);
-_Bool PCD_PerformSelfTest(void);
+bool PCD_PerformSelfTest(void);
 
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -265,11 +266,14 @@ void PCD_SoftPowerUp(void);
 // Functions for communicating with PICCs
 /////////////////////////////////////////////////////////////////////////////////////
 
-StatusCode PCD_TransceiveData(uint8_t *sendData, uint8_t sendLen, uint8_t *backData, uint8_t *backLen, uint8_t *validBits, uint8_t rxAlign, _Bool checkCRC);
-StatusCode PCD_CommunicateWithPICC(uint8_t command, uint8_t waitIRq, uint8_t *sendData, uint8_t sendLen, uint8_t *backData, uint8_t *backLen, uint8_t *validBits, uint8_t rxAlign, _Bool checkCRC);
+// validBits = NULL, rxAlign = 0, checkCRC = false;
+StatusCode PCD_TransceiveData(uint8_t *sendData, uint8_t sendLen, uint8_t *backData, uint8_t *backLen, uint8_t *validBits, uint8_t rxAlign, bool checkCRC);
+// backData = NULL, backLen = NULL, validBits = NULL, rxAlign = 0, checkCRC = false;
+StatusCode PCD_CommunicateWithPICC(uint8_t command, uint8_t waitIRq, uint8_t *sendData, uint8_t sendLen, uint8_t *backData, uint8_t *backLen, uint8_t *validBits, uint8_t rxAlign, bool checkCRC);
 StatusCode PICC_RequestA(uint8_t *bufferATQA, uint8_t *bufferSize);
 StatusCode PICC_WakeupA(uint8_t *bufferATQA, uint8_t *bufferSize);
 StatusCode PICC_REQA_or_WUPA(uint8_t command, uint8_t *bufferATQA, uint8_t *bufferSize);
+// validBits = 0
 StatusCode PICC_Seclect(Uid *uid, uint8_t validBits);
 StatusCode PICC_HaltA(void);
 
@@ -297,7 +301,9 @@ StatusCode MIFARE_TwoStepHelper(uint8_t command, uint8_t blockAddr, int32_t data
 /////////////////////////////////////////////////////////////////////////////////////
 // Support functions
 /////////////////////////////////////////////////////////////////////////////////////
-StatusCode PCD_MIFARE_Transceive(uint8_t *sendData, uint8_t sendLen, _Bool acceptTimeout);
+
+// acceptTimeout = false;
+StatusCode PCD_MIFARE_Transceive(uint8_t *sendData, uint8_t sendLen, bool acceptTimeout);
 // old function used too much memory, now name moved to flash; if you need char, copy from flash to memory
 //const char *GetStatusCodeName(uint8_t code);
 char *GetStatusCodeName(StatusCode code);
@@ -318,17 +324,17 @@ void PICC_DumpMifareUltralightToSerial(void);
 // DEPRECATED_MSG("name will change in next version")
 void MIFARE_SetAccessBits(uint8_t *accessBitBuffer, uint8_t g0, uint8_t g1, uint8_t g2, uint8_t g3);
 // DEPRECATED_MSG("will move to extra class in next version")
-_Bool MIFARE_OpenUidBackdoor(_Bool logErrors);
+bool MIFARE_OpenUidBackdoor(bool logErrors);
 // DEPRECATED_MSG("will move to extra class in next version")
-_Bool MIFARE_SetUid(uint8_t *newUid, uint8_t uidSize, _Bool logErrors);
+bool MIFARE_SetUid(uint8_t *newUid, uint8_t uidSize, bool logErrors);
 // DEPRECATED_MSG("will move to extra class in next version")
-_Bool MIFARE_UnbrickUidSector(_Bool logErrors);
+bool MIFARE_UnbrickUidSector(bool logErrors);
 
 /////////////////////////////////////////////////////////////////////////////////////
 // Convenience functions - does not add extra functionality
 /////////////////////////////////////////////////////////////////////////////////////
-_Bool PICC_IsNewCardPresent(void);
-_Bool PICC_ReadCardSerial(void);
+bool PICC_IsNewCardPresent(void);
+bool PICC_ReadCardSerial(void);
 
 extern Uid uid;
 

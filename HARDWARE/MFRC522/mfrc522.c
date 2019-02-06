@@ -1,6 +1,6 @@
 #include "mfrc522.h"
-#include "stdio.h"
-#include "string.h"
+#include <stdio.h>
+#include <string.h>
 #include "delay.h"
 
 uint8_t FIFO_SIZE = 64;
@@ -237,7 +237,7 @@ StatusCode PCD_CalculateCRC(uint8_t *data,  ///< In: Pointer to the data to tran
  */
 void PCD_Init(void)
 {
-    _Bool hardReset = 0;
+    bool hardReset = false;
 
     HardSPI_Init();
     MFRC522_PinConfig();
@@ -258,7 +258,7 @@ void PCD_Init(void)
     // 		digitalWrite(_resetPowerDownPin, HIGH);		// Exit power down mode. This triggers a hard reset.
     // 		// Section 8.8.2 in the datasheet says the oscillator start-up time is the start up time of the crystal + 37,74μs. Let us be generous: 50ms.
     // 		delay(50);
-    // 		hardReset = 1;
+    // 		hardReset = ture;
     // 	}
     // }
 
@@ -356,12 +356,12 @@ void PCD_SetAntennaGain(uint8_t mask)
  * 
  * @return Whether or not the test passed. Or false if no firmware reference is available.
  */
-_Bool PCD_PerformSelfTest(void)
+bool PCD_PerformSelfTest(void)
 {
     const uint8_t *reference;
     uint8_t ZEROES[25] = {0x00};
     uint8_t result[64];
-    uint8_t version, n, i;
+    uint8_t version, n;
 
     // This follows directly the steps outlined in 16.1.1
     // 1. Perform a soft reset.
@@ -382,7 +382,7 @@ _Bool PCD_PerformSelfTest(void)
     PCD_WriteRegister(CommandReg, PCD_CalcCRC);
 
     // 6. Wait for self-test to complete
-    for (i = 0; i < 0xFF; i++)
+    for (uint8_t i = 0; i < 0xFF; i++)
     {
         // The datasheet does not specify exact completion condition except
         // that FIFO buffer should contain 64 bytes.
@@ -427,7 +427,7 @@ _Bool PCD_PerformSelfTest(void)
         reference = MFRC522_firmware_referenceV2_0;
         break;
     default:      // Unknown version
-        return 0; // abort test
+        return false; // abort test
     }
 
     // Verify that the results match up to our expectations
@@ -435,12 +435,12 @@ _Bool PCD_PerformSelfTest(void)
     {
         if (result[i] != reference[i])
         {
-            return 0;
+            return false;
         }
     }
 
     // Test passed; all is good.
-    return 1;
+    return true;
 } // End PCD_PerformSelfTest()
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -493,7 +493,7 @@ StatusCode PCD_TransceiveData(uint8_t *sendData,  ///< Pointer to the data to tr
                               uint8_t *backLen,   ///< In: Max number of bytes to write to *backData. Out: The number of bytes returned.
                               uint8_t *validBits, ///< In/Out: The number of valid bits in the last byte. 0 for 8 valid bits. Default NULL.
                               uint8_t rxAlign,    ///< In: Defines the bit position in backData[0] for the first bit received. Default 0.
-                              _Bool checkCRC      ///< In: True => The last two bytes of the response is assumed to be a CRC_A that must be validated.
+                              bool checkCRC      ///< In: True => The last two bytes of the response is assumed to be a CRC_A that must be validated.
 )
 {
     uint8_t waitIRq = 0x30; // RxIRq and IdleIRq
@@ -514,7 +514,7 @@ StatusCode PCD_CommunicateWithPICC(uint8_t command,    ///< The command to execu
                                    uint8_t *backLen,   ///< In: Max number of bytes to write to *backData. Out: The number of bytes returned.
                                    uint8_t *validBits, ///< In/Out: The number of valid bits in the last byte. 0 for 8 valid bits.
                                    uint8_t rxAlign,    ///< In: Defines the bit position in backData[0] for the first bit received. Default 0.
-                                   _Bool checkCRC      ///< In: True => The last two bytes of the response is assumed to be a CRC_A that must be validated.
+                                   bool checkCRC      ///< In: True => The last two bytes of the response is assumed to be a CRC_A that must be validated.
 )
 {
     // Prepare values for BitFramingReg
@@ -662,7 +662,7 @@ StatusCode PICC_REQA_or_WUPA(uint8_t command,     ///< The command to send - PIC
     }
     PCD_ClearRegisterBitMask(CollReg, 0x80); // ValuesAfterColl=1 => Bits received after collision are cleared.
     validBits = 7;                           // For REQA and WUPA we need the short frame format - transmit only 7 bits of the last (and only) byte. TxLastBits = BitFramingReg[2..0]
-    status = PCD_TransceiveData(&command, 1, bufferATQA, bufferSize, &validBits, 0, 0);
+    status = PCD_TransceiveData(&command, 1, bufferATQA, bufferSize, &validBits, 0, false);
     if (status != STATUS_OK)
     {
         return status;
@@ -695,9 +695,9 @@ StatusCode PICC_Select(Uid *uid,         ///< Pointer to Uid struct. Normally ou
                        uint8_t validBits ///< The number of known UID bits supplied in *uid. Normally 0. If set you must also supply uid->size.
 )
 {
-    _Bool uidComplete;
-    _Bool selectDone;
-    _Bool useCascadeTag;
+    bool uidComplete;
+    bool selectDone;
+    bool useCascadeTag;
     uint8_t cascadeLevel = 1;
     StatusCode result;
     uint8_t count;
@@ -770,7 +770,7 @@ StatusCode PICC_Select(Uid *uid,         ///< Pointer to Uid struct. Normally ou
 
         default:
             return STATUS_INTERNAL_ERROR;
-            break;
+            // break; // Can't reach
         }
 
         // How many UID bits are known in this Cascade Level?
@@ -845,7 +845,7 @@ StatusCode PICC_Select(Uid *uid,         ///< Pointer to Uid struct. Normally ou
             PCD_WriteRegister(BitFramingReg, (rxAlign << 4) + txLastBits); // RxAlign = BitFramingReg[6..4]. TxLastBits = BitFramingReg[2..0]
 
             // Transmit the buffer and receive the response.
-            result = PCD_TransceiveData(buffer, bufferUsed, responseBuffer, &responseLength, &txLastBits, rxAlign, 0);
+            result = PCD_TransceiveData(buffer, bufferUsed, responseBuffer, &responseLength, &txLastBits, rxAlign, false);
             if (result == STATUS_COLLISION)
             {                                                       // More than one PICC in the field => collision.
                 uint8_t valueOfCollReg = PCD_ReadRegister(CollReg); // CollReg[7..0] bits are: ValuesAfterColl reserved CollPosNotValid CollPos[4:0]
@@ -956,7 +956,7 @@ StatusCode PICC_HaltA(void)
     //		If the PICC responds with any modulation during a period of 1 ms after the end of the frame containing the
     //		HLTA command, this response shall be interpreted as 'not acknowledge'.
     // We interpret that this way: Only STATUS_TIMEOUT is a success.
-    result = PCD_TransceiveData(buffer, sizeof(buffer), NULL, 0, NULL, 0, 0);
+    result = PCD_TransceiveData(buffer, sizeof(buffer), NULL, 0, NULL, 0, false);
     if (result == STATUS_TIMEOUT)
     {
         return STATUS_OK;
@@ -1063,7 +1063,7 @@ StatusCode MIFARE_Read(uint8_t blockAddr,  ///< MIFARE Classic: The block (0-0xf
     }
 
     // Transmit the buffer and receive the response, validate CRC_A.
-    return PCD_TransceiveData(buffer, 4, buffer, bufferSize, NULL, 0, 1);
+    return PCD_TransceiveData(buffer, 4, buffer, bufferSize, NULL, 0, true);
 } // End MIFARE_Read()
 
 /**
@@ -1366,7 +1366,7 @@ StatusCode PCD_NTAG216_AUTH(uint8_t *passWord, uint8_t pACK[]) //Authenticate wi
  */
 StatusCode PCD_MIFARE_Transceive(	uint8_t *sendData,		///< Pointer to the data to transfer to the FIFO. Do NOT include the CRC_A.
 													uint8_t sendLen,		///< Number of bytes in sendData.
-													_Bool acceptTimeout	///< True => A timeout is also success
+													bool acceptTimeout	///< True => A timeout is also success
 												) {
 	StatusCode result;
 	uint8_t cmdBuffer[18]; // We need room for 16 bytes data and 2 bytes CRC_A.
@@ -1630,7 +1630,7 @@ void PICC_DumpMifareClassicSectorToSerial(Uid *uid,			///< Pointer to Uid struct
 	StatusCode status;
 	uint8_t firstBlock;		// Address of lowest address to dump actually last block dumped)
 	uint8_t no_of_blocks;		// Number of blocks in sector
-	_Bool isSectorTrailer;	// Set to true while handling the "last" (ie highest address) in the sector.
+	bool isSectorTrailer;	// Set to true while handling the "last" (ie highest address) in the sector.
 	
 	// The access bits are stored in a peculiar fashion.
 	// There are four groups:
@@ -1642,10 +1642,10 @@ void PICC_DumpMifareClassicSectorToSerial(Uid *uid,			///< Pointer to Uid struct
 	// The four CX bits are stored together in a nible cx and an inverted nible cx_.
 	uint8_t c1, c2, c3;		// Nibbles
 	uint8_t c1_, c2_, c3_;		// Inverted nibbles
-	_Bool invertedError;		// True if one of the inverted nibbles did not match
+	bool invertedError;		// True if one of the inverted nibbles did not match
 	uint8_t g[4];				// Access bits for each of the four groups.
 	uint8_t group;				// 0-3 - active group for access bits
-	_Bool firstInGroup;		// True for the first block dumped in the group
+	bool firstInGroup;		// True for the first block dumped in the group
 	
 	// Determine position and size of sector.
 	if (sector < 32) { // Sectors 0..31 has 4 blocks each
@@ -1840,7 +1840,7 @@ void MIFARE_SetAccessBits(	uint8_t *accessBitBuffer,	///< Pointer to byte 6, 7 a
  * 
  * Of course with non-bricked devices, you're free to select them before calling this function.
  */
-_Bool MIFARE_OpenUidBackdoor(_Bool logErrors) {
+bool MIFARE_OpenUidBackdoor(bool logErrors) {
 	// Magic sequence:
 	// > 50 00 57 CD (HALT + CRC)
 	// > 40 (7 bits only)
@@ -1856,44 +1856,44 @@ _Bool MIFARE_OpenUidBackdoor(_Bool logErrors) {
 						  this will contain amount of valid response bits. */
 	uint8_t response[32]; // Card's response is written here
 	uint8_t received;
-	StatusCode status = PCD_TransceiveData(&cmd, (uint8_t)1, response, &received, &validBits, (uint8_t)0, 0); // 40
+	StatusCode status = PCD_TransceiveData(&cmd, (uint8_t)1, response, &received, &validBits, (uint8_t)0, false); // 40
 	if(status != STATUS_OK) {
 		if(logErrors) {
 			printf("Card did not respond to 0x40 after HALT command. Are you sure it is a UID changeable one?\r\n");
 			printf("Error name: ");
 			printf("%s", GetStatusCodeName(status));
 		}
-		return 0;
+		return false;
 	}
 	if (received != 1 || response[0] != 0x0A) {
 		if (logErrors) {
 			printf("Got bad response on backdoor 0x40 command: ");
 			printf("%X(%d valid bits)\r\n", response[0], validBits);
 		}
-		return 0;
+		return false;
 	}
 	
 	cmd = 0x43;
 	validBits = 8;
-	status = PCD_TransceiveData(&cmd, (uint8_t)1, response, &received, &validBits, (uint8_t)0, 0); // 43
+	status = PCD_TransceiveData(&cmd, (uint8_t)1, response, &received, &validBits, (uint8_t)0, false); // 43
 	if(status != STATUS_OK) {
 		if(logErrors) {
 			printf("Error in communication at command 0x43, after successfully executing 0x40");
 			printf("Error name: ");
 			printf("%s", GetStatusCodeName(status));
 		}
-		return 0;
+		return false;
 	}
 	if (received != 1 || response[0] != 0x0A) {
 		if (logErrors) {
 			printf("Got bad response on backdoor 0x43 command: ");
             printf("%X (%d valid bits)\r\n", response[0], validBits);
 		}
-		return 0;
+		return false;
 	}
 	
 	// You can now write to sector 0 without authenticating!
-	return 1;
+	return true;
 } // End MIFARE_OpenUidBackdoor()
 
 /**
@@ -1904,14 +1904,14 @@ _Bool MIFARE_OpenUidBackdoor(_Bool logErrors) {
  * It assumes a default KEY A of 0xFFFFFFFFFFFF.
  * Make sure to have selected the card before this function is called.
  */
-_Bool MIFARE_SetUid(uint8_t *newUid, uint8_t uidSize, _Bool logErrors) {
+bool MIFARE_SetUid(uint8_t *newUid, uint8_t uidSize, bool logErrors) {
 	
 	// UID + BCC byte can not be larger than 16 together
 	if (!newUid || !uidSize || uidSize > 15) {
 		if (logErrors) {
 			printf("New UID buffer empty, size 0, or size > 15 given");
 		}
-		return 0;
+		return false;
 	}
 	
 	// Authenticate for reading
@@ -1929,7 +1929,7 @@ _Bool MIFARE_SetUid(uint8_t *newUid, uint8_t uidSize, _Bool logErrors) {
 			
 			if (!PICC_IsNewCardPresent() || !PICC_ReadCardSerial()) {
 				printf("No card was previously selected, and none are available. Failed to set UID.");
-				return 0;
+				return false;
 			}
 			
 			status = PCD_Authenticate(PICC_CMD_MF_AUTH_KEY_A, (uint8_t)1, &key, &uid);
@@ -1939,7 +1939,7 @@ _Bool MIFARE_SetUid(uint8_t *newUid, uint8_t uidSize, _Bool logErrors) {
 					printf("Failed to authenticate to card for reading, could not set UID: ");
 					printf("%s", GetStatusCodeName(status));
 				}
-				return 0;
+				return false;
 			}
 		}
 		else {
@@ -1947,7 +1947,7 @@ _Bool MIFARE_SetUid(uint8_t *newUid, uint8_t uidSize, _Bool logErrors) {
 				printf("PCD_Authenticate() failed: ");
 				printf("%s", GetStatusCodeName(status));
 			}
-			return 0;
+			return false;
 		}
 	}
 	
@@ -1961,7 +1961,7 @@ _Bool MIFARE_SetUid(uint8_t *newUid, uint8_t uidSize, _Bool logErrors) {
 			printf("%s", GetStatusCodeName(status));
 			printf("Are you sure your KEY A for sector 0 is 0xFFFFFFFFFFFF?");
 		}
-		return 0;
+		return false;
 	}
 	
 	// Write new UID to the data we just read, and calculate BCC byte
@@ -1982,7 +1982,7 @@ _Bool MIFARE_SetUid(uint8_t *newUid, uint8_t uidSize, _Bool logErrors) {
 		if (logErrors) {
 			printf("Activating the UID backdoor failed.");
 		}
-		return 0;
+		return false;
 	}
 	
 	// Write modified block 0 back to card
@@ -1992,7 +1992,7 @@ _Bool MIFARE_SetUid(uint8_t *newUid, uint8_t uidSize, _Bool logErrors) {
 			printf("MIFARE_Write() failed: ");
 			printf("%s", GetStatusCodeName(status));
 		}
-		return 0;
+		return false;
 	}
 	
 	// Wake the card up again
@@ -2000,13 +2000,13 @@ _Bool MIFARE_SetUid(uint8_t *newUid, uint8_t uidSize, _Bool logErrors) {
 	uint8_t atqa_size = 2;
 	PICC_WakeupA(atqa_answer, &atqa_size);
 	
-	return 1;
+	return true;
 }
 
 /**
  * Resets entire sector 0 to zeroes, so the card can be read again by readers.
  */
-_Bool MIFARE_UnbrickUidSector(_Bool logErrors) {
+bool MIFARE_UnbrickUidSector(bool logErrors) {
 	MIFARE_OpenUidBackdoor(logErrors);
 	
 	uint8_t block0_buffer[] = {0x01, 0x02, 0x03, 0x04, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
@@ -2018,9 +2018,9 @@ _Bool MIFARE_UnbrickUidSector(_Bool logErrors) {
 			printf("MIFARE_Write() failed: ");
 			printf("%s", GetStatusCodeName(status));
 		}
-		return 0;
+		return false;
 	}
-	return 1;
+	return true;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -2031,9 +2031,9 @@ _Bool MIFARE_UnbrickUidSector(_Bool logErrors) {
  * Returns true if a PICC responds to PICC_CMD_REQA.
  * Only "new" cards in state IDLE are invited. Sleeping cards in state HALT are ignored.
  * 
- * @return _Bool
+ * @return bool
  */
-_Bool PICC_IsNewCardPresent() {
+bool PICC_IsNewCardPresent() {
 	uint8_t bufferATQA[2];
 	uint8_t bufferSize = sizeof(bufferATQA);
 
@@ -2053,9 +2053,9 @@ _Bool PICC_IsNewCardPresent() {
  * Remember to call PICC_IsNewCardPresent(), PICC_RequestA() or PICC_WakeupA() first.
  * The read UID is available in the class variable uid.
  * 
- * @return _Bool
+ * @return bool
  */
-_Bool PICC_ReadCardSerial() {
+bool PICC_ReadCardSerial() {
 	StatusCode result = PICC_Select(&uid, 0);
 	return (result == STATUS_OK);
 } // End 
